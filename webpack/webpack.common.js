@@ -28,7 +28,7 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({ gameName: 'Football Jump Game', template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ gameName: 'Side Scrolling Shooter', template: 'src/index.html' }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'src/assets', to: 'assets' },
