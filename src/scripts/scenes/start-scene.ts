@@ -1,5 +1,7 @@
 import FpsText from '../objects/fpsText';
 import {mainConst} from '../const/main-const';
+import {Color} from "../const/color";
+import {GameSceneRoute} from "../const/gamae-scene-route";
 
 export default class StartScene extends Phaser.Scene {
   fpsText;
@@ -9,7 +11,10 @@ export default class StartScene extends Phaser.Scene {
   }
 
   create() {
-    this.createBackground()
+    this.createBackground();
+    this.createText();
+    this.setEvents();
+    //=========
     this.createInfoForDeveloper();
   }
 
@@ -19,10 +24,21 @@ export default class StartScene extends Phaser.Scene {
 
   createBackground() {
     this.add.sprite(mainConst.GameScreenWidth * 0.5, mainConst.GameScreenHeight * 0.5, 'bg-lvl-1-sky');
-    this.add.sprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-mountains').setOrigin(0, 1);
-    this.add.sprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-plateau').setOrigin(0, 1);
-    this.add.sprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-ground').setOrigin(0, 1);
-    this.add.sprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-plant').setOrigin(0, 1);
+  }
+
+  createText() {
+    this.add
+      .text(mainConst.GameScreenWidth * 0.5, mainConst.GameScreenHeight * 0.5, 'Tap to start', {
+        color: Color.basicWhite,
+        fontSize: '40px',
+    })
+      .setOrigin(0.5);
+  }
+
+  setEvents() {
+    this.input.on('pointerdown', () => {
+      this.scene.start(GameSceneRoute.Level1)
+    })
   }
 
   createInfoForDeveloper() {
@@ -32,7 +48,7 @@ export default class StartScene extends Phaser.Scene {
     // display the Phaser.VERSION
     this.add
       .text(this.cameras.main.width - 15, 15, `Phaser v${Phaser.VERSION}`, {
-        color: '#000000',
+        color: Color.basicBlack,
         fontSize: '24px',
       })
       .setOrigin(1, 0);

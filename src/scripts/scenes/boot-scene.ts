@@ -1,3 +1,5 @@
+import {GameSceneRoute} from "../const/gamae-scene-route";
+
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super({key: 'boot-scene'});
@@ -8,6 +10,6 @@ export default class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('preload-scene');
+    this.scene.start(GameSceneRoute.Preload);
   }
 }
