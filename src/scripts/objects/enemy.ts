@@ -8,6 +8,15 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.init();
   }
 
+  static generate(scene) {
+    const x = mainConst.GameScreenWidth - 150;
+    const y = mainConst.GameScreenHeight * 0.5;
+    const texture = "enemy";
+    const frame = "enemy_1";
+
+    return  new Enemy(scene, x, y, texture, frame);
+  }
+
   init() {
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);

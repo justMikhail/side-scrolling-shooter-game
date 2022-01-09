@@ -26,7 +26,7 @@ export default class Level1Scene extends Phaser.Scene {
   create() {
     this.createBackground()
     this.player = new Player(this, 150, mainConst.GameScreenHeight * 0.5, 'player', 'fly_000').setScale(0.2);
-    this.enemy = new Enemy(this, mainConst.GameScreenWidth - 100, mainConst.GameScreenHeight * 0.5, 'enemy', 'enemy_1').setScale(1);
+    this.enemy = Enemy.generate(this);
     //=========
     this.createInfoForDeveloper();
   }
