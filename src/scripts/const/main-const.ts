@@ -8,5 +8,8 @@ export const mainConst = {
         leftSpeed: 200,
         upSpeed: 250,
         downSpeed: 250
+    },
+    enemy: {
+      basicSpeed: 100,
     }
 } as const;

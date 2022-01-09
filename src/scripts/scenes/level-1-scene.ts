@@ -2,10 +2,12 @@ import FpsText from '../objects/fpsText';
 import {mainConst} from '../const/main-const';
 //objects
 import {Player} from "../objects/player";
+import {Enemy} from '../objects/enemy';
 
 export default class Level1Scene extends Phaser.Scene {
   fpsText;
   player;
+  enemy;
   cursors;
   bgSky;
 
@@ -14,7 +16,7 @@ export default class Level1Scene extends Phaser.Scene {
   }
 
   init() {
-
+    this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   preload() {
@@ -23,16 +25,17 @@ export default class Level1Scene extends Phaser.Scene {
 
   create() {
     this.createBackground()
-    this.cursors = this.input.keyboard.createCursorKeys();
     this.player = new Player(this, 150, mainConst.GameScreenHeight * 0.5, 'player', 'fly_000').setScale(0.2);
+    this.enemy = new Enemy(this, mainConst.GameScreenWidth - 100, mainConst.GameScreenHeight * 0.5, 'enemy', 'enemy_1').setScale(1);
     //=========
     this.createInfoForDeveloper();
   }
 
   update() {
     this.fpsText.update();
-    this.player.addMovement(this.cursors);
     this.bgSky.tilePositionX += 0.5;
+    this.player.addMovement(this.cursors);
+    this.enemy.addMovement();
   }
 
   createBackground() {
@@ -51,8 +54,7 @@ export default class Level1Scene extends Phaser.Scene {
     this.add
       .text(this.cameras.main.width - 15, 15, `Phaser v${Phaser.VERSION}`, {
         color: '#000000',
-        fontSize: '24px',
-        fontStyle: 'BebasNeue',
+        fontSize: '24px'
       })
       .setOrigin(1, 0);
   }
