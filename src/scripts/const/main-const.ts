@@ -11,5 +11,8 @@ export const mainConst = {
     },
     enemy: {
       basicSpeed: 500,
+    },
+    fireItem: {
+      basicSpeed: 700,
     }
 } as const;

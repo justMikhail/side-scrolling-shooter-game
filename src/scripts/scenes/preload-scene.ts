@@ -19,6 +19,8 @@ export default class PreloadScene extends Phaser.Scene {
     );
     //enemy
     this.load.atlas('enemy', '../../assets/sprites/enemy/enemy.png', '../../assets/sprites/enemy/enemy.json');
+    //items
+    this.load.image('fire-item', '../../assets/sprites/items/fire.png');
   }
 
   create() {

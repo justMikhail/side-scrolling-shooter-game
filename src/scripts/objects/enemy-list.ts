@@ -1,7 +1,7 @@
-import {Enemy} from './enemy';
-import Phaser from "phaser";
+import {EnemyItem} from './enemy-item';
+import Phaser from 'phaser';
 
-export default class Enemies extends Phaser.Physics.Arcade.Group {
+export default class EnemyList extends Phaser.Physics.Arcade.Group {
   enemyMaxCount: number;
   enemyCreatedCount: number;
   timer;
@@ -17,12 +17,12 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
       delay: 1000,
       loop: true,
       callback: this.createEnemyListByTimer,
-      callbackScope: this
-    })
+      callbackScope: this,
+    });
   }
 
   createEnemyListByTimer() {
-    if(this.enemyCreatedCount <= this.enemyMaxCount) {
+    if (this.enemyCreatedCount <= this.enemyMaxCount) {
       this.createEnemyItem();
     } else {
       this.timer.remove();
@@ -32,14 +32,14 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   createEnemyItem() {
     let enemy = this.getFirstDead();
 
-    if(!enemy) {
-      enemy = Enemy.generate(this.scene);
+    if (!enemy) {
+      enemy = EnemyItem.generate(this.scene);
     } else {
       enemy.reset();
     }
 
     this.add(enemy);
     enemy.addMovement();
-    ++this.enemyCreatedCount
+    ++this.enemyCreatedCount;
   }
 }
