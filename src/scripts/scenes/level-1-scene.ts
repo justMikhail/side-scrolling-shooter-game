@@ -34,7 +34,6 @@ export default class Level1Scene extends Phaser.Scene {
     this.fpsText.update();
     this.bgSky.tilePositionX += 0.5;
     this.player.addMovement(this.cursors);
-    //this.enemy.addMovement();
   }
 
   createBackground() {

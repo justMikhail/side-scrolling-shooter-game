@@ -10,6 +10,6 @@ export const mainConst = {
         downSpeed: 250
     },
     enemy: {
-      basicSpeed: 100,
+      basicSpeed: 500,
     }
 } as const;
