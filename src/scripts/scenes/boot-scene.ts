@@ -1,4 +1,4 @@
-import {GameSceneRoute} from "../const/gamae-scene-route";
+import {GameSceneRoute} from '../const/gamae-scene-route';
 
 export default class BootScene extends Phaser.Scene {
   constructor() {

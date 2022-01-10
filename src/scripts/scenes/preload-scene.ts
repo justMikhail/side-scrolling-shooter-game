@@ -1,4 +1,4 @@
-import {GameSceneRoute} from "../const/gamae-scene-route";
+import {GameSceneRoute} from '../const/gamae-scene-route';
 
 export default class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -12,9 +12,13 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('bg-lvl-1-plateau', '../../assets/sprites/backgrounds/level-1-bg/plateau.png');
     this.load.image('bg-lvl-1-ground', '../../assets/sprites/backgrounds/level-1-bg/ground.png');
     //player
-    this.load.atlas('player', '../../assets/sprites/player/robot-skin/a-robot-skin.png', '../../assets/sprites/player/robot-skin/a-robot-skin.json')
+    this.load.atlas(
+      'player',
+      '../../assets/sprites/player/robot-skin/a-robot-skin.png',
+      '../../assets/sprites/player/robot-skin/a-robot-skin.json'
+    );
     //enemy
-    this.load.atlas('enemy', '../../assets/sprites/enemy/enemy.png', '../../assets/sprites/enemy/enemy.json')
+    this.load.atlas('enemy', '../../assets/sprites/enemy/enemy.png', '../../assets/sprites/enemy/enemy.json');
   }
 
   create() {
