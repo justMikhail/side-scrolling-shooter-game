@@ -27,7 +27,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   fire() {
-    this.fireList.createFireItem(this, );
+    this.fireList.createFireItem(this);
   }
 
   addMovement(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {

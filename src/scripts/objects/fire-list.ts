@@ -13,7 +13,7 @@ export class FireList extends Phaser.Physics.Arcade.Group {
       fireItem = FireItem.generate(this.scene, sourceObject);
       this.add(fireItem);
     } else {
-      fireItem.reset();
+      fireItem.reset(sourceObject);
     }
 
     fireItem.addMovement();

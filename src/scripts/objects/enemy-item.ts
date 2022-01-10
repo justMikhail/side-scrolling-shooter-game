@@ -40,7 +40,6 @@ export class EnemyItem extends Phaser.Physics.Arcade.Sprite {
 
   update() {
     if (this.active && this.x < -this.width) {
-      console.log('deactivated');
       this.setAliveStatus(false);
     }
   }

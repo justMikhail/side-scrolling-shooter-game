@@ -20,13 +20,30 @@ export class FireItem extends Phaser.Physics.Arcade.Sprite {
 
   init(data) {
     this.scene.add.existing(this);
+    this.scene.events.on('update', this.update, this);
+  }
+
+  update() {
+    if (this.active && (this.x < -mainConst.GameScreenWidth || this.x > mainConst.GameScreenWidth + this.width)) {
+      console.log("deactivated fire")
+      this.setAliveStatus(false);
+    }
+  }
+
+  setAliveStatus(currentStatus: boolean) {
+    this.body.enable = currentStatus;
+    this.setVisible(currentStatus);
+    this.setActive(currentStatus);
   }
 
   addMovement() {
     this.setVelocityX(mainConst.fireItem.basicSpeed);
   }
 
-  reset() {
-
+  reset(sourceObject) {
+    this.x = sourceObject.x + 15;
+    this.y = sourceObject.y;
+    this.setAliveStatus(true);
+    console.log('reset fire')
   }
 }
