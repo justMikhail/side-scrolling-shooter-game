@@ -27,6 +27,7 @@ export default class Level1Scene extends Phaser.Scene {
     this.player = new Player(this).setScale(0.2);
     this.enemyGroup = new EnemyGroup(this);
     this.addOverlap();
+    this.createCompleteEvents();
     //===========================
     this.createInfoForDeveloper();
   }
@@ -47,7 +48,7 @@ export default class Level1Scene extends Phaser.Scene {
     //this.add.tileSprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-plant').setOrigin(0, 1);
   }
 
-  addOverlap(){
+  addOverlap() {
     this.physics.add.overlap(this.player.fires, this.enemyGroup, this.handleOverlap, undefined, this);
     this.physics.add.overlap(this.enemyGroup.fires, this.player, this.handleOverlap, undefined, this);
     this.physics.add.overlap(this.player, this.enemyGroup, this.handleOverlap, undefined, this);
@@ -56,6 +57,16 @@ export default class Level1Scene extends Phaser.Scene {
   handleOverlap(source, target) {
     source.setAliveStatus(false);
     target.setAliveStatus(false);
+  }
+
+  createCompleteEvents() {
+    this.player.once('killed', this.onComplete, this);
+
+    console.log(this.player.once);
+  }
+
+  onComplete() {
+    this.scene.start('start-scene');
   }
 
   createInfoForDeveloper() {

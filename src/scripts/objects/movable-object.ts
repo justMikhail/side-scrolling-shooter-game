@@ -39,6 +39,10 @@ export class MovableObject extends Phaser.Physics.Arcade.Sprite {
     if (this.timer) {
       this.timer.remove();
     }
+
+    if (!status) {
+      this.emit('killed');
+    }
   }
 
   addMove() {
