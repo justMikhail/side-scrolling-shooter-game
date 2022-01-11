@@ -13,10 +13,11 @@ export class EnemyItem extends MovableObject {
     return {x, y, frame: `enemy_${Phaser.Math.Between(1, 4)}`};
   }
 
-  static generate(scene) {
+  static generate(scene, fires) {
     const data = EnemyItem.generateAttributes();
     return new EnemyItem({
       scene,
+      fires,
       x: data.x,
       y: data.y,
       texture: 'enemy',
@@ -37,7 +38,8 @@ export class EnemyItem extends MovableObject {
   init(data) {
     super.init(data);
     this.setOrigin(data.origin.x, data.origin.y)
-    this.fires = new FireGroup(this.scene);
+    this.fires = data.fires || new FireGroup(this.scene)
+    //this.fires = new FireGroup(this.scene);
     this.timer = this.scene.time.addEvent({
       delay: data.bullet.delay,
       loop: true,

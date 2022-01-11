@@ -8,7 +8,7 @@ export default class Level1Scene extends Phaser.Scene {
   fpsText;
   player;
   enemy;
-  enemies;
+  enemyGroup;
   cursors;
   bgSky;
 
@@ -25,7 +25,7 @@ export default class Level1Scene extends Phaser.Scene {
   create() {
     this.createBackground();
     this.player = new Player(this).setScale(0.2);
-    this.enemies = new EnemyGroup(this);
+    this.enemyGroup = new EnemyGroup(this);
     this.addOverlap();
     //===========================
     this.createInfoForDeveloper();
@@ -48,7 +48,8 @@ export default class Level1Scene extends Phaser.Scene {
   }
 
   addOverlap(){
-    this.physics.add.overlap(this.player.fires, this.enemies, this.handleOverlap, undefined, this);
+    this.physics.add.overlap(this.player.fires, this.enemyGroup, this.handleOverlap, undefined, this);
+    this.physics.add.overlap(this.enemyGroup.fires, this.player, this.handleOverlap, undefined, this);
   }
 
   handleOverlap(source, target) {

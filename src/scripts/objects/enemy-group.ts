@@ -1,15 +1,17 @@
 import {EnemyItem} from "./enemy-item";
+import {FireGroup} from "./fire-group";
 
 export class EnemyGroup extends Phaser.Physics.Arcade.Group {
     timer;
+    fires;
     countMax;
-    countCreated
+    countCreated;
 
     constructor(scene) {
         // @ts-ignore
         super();
         this.scene = scene;
-
+        this.fires = new FireGroup(this.scene);
         this.countMax = 5;
         this.countCreated = 0;
 
@@ -34,7 +36,7 @@ export class EnemyGroup extends Phaser.Physics.Arcade.Group {
 
         if (!enemy) {
             console.log('create new enemy');
-            enemy  = EnemyItem.generate(this.scene);
+            enemy  = EnemyItem.generate(this.scene, this.fires);
             this.add(enemy);
         } else {
             console.log('reset existing enemy');
