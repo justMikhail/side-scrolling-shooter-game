@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "fly_000",
+	"filename": "fly_1",
 	"frame": {"x":664,"y":2,"w":639,"h":825},
 	"rotated": false,
 	"trimmed": true,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":703,"h":884}
 },
 {
-	"filename": "fly_001",
+	"filename": "fly_2",
 	"frame": {"x":668,"y":830,"w":646,"h":808},
 	"rotated": false,
 	"trimmed": true,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":703,"h":884}
 },
 {
-	"filename": "fly_002",
+	"filename": "fly_3",
 	"frame": {"x":1317,"y":819,"w":656,"h":818},
 	"rotated": false,
 	"trimmed": true,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":703,"h":884}
 },
 {
-	"filename": "fly_003",
+	"filename": "fly_4",
 	"frame": {"x":2,"y":837,"w":663,"h":802},
 	"rotated": false,
 	"trimmed": true,
@@ -33,7 +33,7 @@
 	"sourceSize": {"w":703,"h":884}
 },
 {
-	"filename": "fly_004",
+	"filename": "fly_5",
 	"frame": {"x":1306,"y":2,"w":682,"h":814},
 	"rotated": false,
 	"trimmed": true,
@@ -41,7 +41,7 @@
 	"sourceSize": {"w":703,"h":884}
 },
 {
-	"filename": "fly_005",
+	"filename": "fly_6",
 	"frame": {"x":2,"y":2,"w":659,"h":832},
 	"rotated": false,
 	"trimmed": true,

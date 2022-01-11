@@ -11,7 +11,7 @@ export class Player extends EnemyItem {
       x: 150,
       y: mainConst.GameScreenHeight / 2,
       texture: 'player',
-      frame: 'fly_000',
+      frame: 'fly_1',
       velocity: 500,
       bullet: {
         delay: 500,
@@ -21,8 +21,23 @@ export class Player extends EnemyItem {
       origin: {
         x: 1,
         y: 0.5,
-      }
+      },
     });
+
+    const frames = this.scene.anims.generateFrameNames('player', {
+      prefix: 'fly_',
+      start: 1,
+      end: 6,
+    });
+
+    this.scene.anims.create({
+      key: 'player-fly-anims',
+      frames,
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.play('player-fly-anims');
   }
 
   // @ts-ignore todo fix TS error
