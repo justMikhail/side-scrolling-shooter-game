@@ -50,6 +50,7 @@ export default class Level1Scene extends Phaser.Scene {
   addOverlap(){
     this.physics.add.overlap(this.player.fires, this.enemyGroup, this.handleOverlap, undefined, this);
     this.physics.add.overlap(this.enemyGroup.fires, this.player, this.handleOverlap, undefined, this);
+    this.physics.add.overlap(this.player, this.enemyGroup, this.handleOverlap, undefined, this);
   }
 
   handleOverlap(source, target) {
