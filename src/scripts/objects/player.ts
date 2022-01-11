@@ -26,21 +26,6 @@ export class Player extends EnemyItem {
     });
   }
 
-  init(data) {
-    super.init(data);
-    this.fires = new FireGroup(this.scene);
-    this.timer = this.scene.time.addEvent({
-      delay: 500,
-      loop: true,
-      callback: this.fire,
-      callbackScope: this,
-    });
-  }
-
-  fire() {
-    this.fires.createFire(this);
-  }
-
   // @ts-ignore
   addMove(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
     this.setVelocity(mainConst.player.basicSpeed);
