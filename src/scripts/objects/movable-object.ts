@@ -1,5 +1,6 @@
 export class MovableObject extends Phaser.Physics.Arcade.Sprite {
   velocity;
+  timer;
 
   constructor(data) {
     super(data.scene, data.x, data.y, data.texture, data.frame);
@@ -34,6 +35,10 @@ export class MovableObject extends Phaser.Physics.Arcade.Sprite {
     this.body.enable = status;
     this.setVisible(status);
     this.setActive(status);
+
+    if (this.timer) {
+      this.timer.remove();
+    }
   }
 
   addMove() {

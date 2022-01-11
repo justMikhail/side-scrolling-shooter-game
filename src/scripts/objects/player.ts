@@ -1,6 +1,6 @@
 import {mainConst} from '../const/main-const';
 import {EnemyItem} from './enemy-item';
-import {FireList} from './fire-list';
+import {FireGroup} from './fire-group';
 
 export class Player extends EnemyItem {
   fires;
@@ -28,7 +28,7 @@ export class Player extends EnemyItem {
 
   init(data) {
     super.init(data);
-    this.fires = new FireList(this.scene);
+    this.fires = new FireGroup(this.scene);
     this.timer = this.scene.time.addEvent({
       delay: 500,
       loop: true,

@@ -1,6 +1,6 @@
 import {EnemyItem} from "./enemy-item";
 
-export class EnemyList extends Phaser.Physics.Arcade.Group {
+export class EnemyGroup extends Phaser.Physics.Arcade.Group {
     timer;
     countMax;
     countCreated

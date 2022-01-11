@@ -1,6 +1,6 @@
 import {FireItem} from './fire-item';
 
-export class FireList extends Phaser.Physics.Arcade.Group {
+export class FireGroup extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super(scene.physics.world, scene);
   }

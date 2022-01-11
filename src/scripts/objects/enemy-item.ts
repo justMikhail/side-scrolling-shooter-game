@@ -1,6 +1,6 @@
 import {mainConst} from '../const/main-const';
 import {MovableObject} from './movable-object';
-import {FireList} from "./fire-list";
+import {FireGroup} from "./fire-group";
 
 export class EnemyItem extends MovableObject {
   fires;
@@ -37,7 +37,7 @@ export class EnemyItem extends MovableObject {
   init(data) {
     super.init(data);
     this.setOrigin(data.origin.x, data.origin.y)
-    this.fires = new FireList(this.scene);
+    this.fires = new FireGroup(this.scene);
     this.timer = this.scene.time.addEvent({
       delay: data.bullet.delay,
       loop: true,

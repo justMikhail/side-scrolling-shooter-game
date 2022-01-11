@@ -2,7 +2,7 @@ import FpsText from '../objects/fpsText';
 import {mainConst} from '../const/main-const';
 //objects
 import {Player} from '../objects/player';
-import {EnemyList} from '../objects/enemy-list';
+import {EnemyGroup} from '../objects/enemy-group';
 
 export default class Level1Scene extends Phaser.Scene {
   fpsText;
@@ -25,7 +25,8 @@ export default class Level1Scene extends Phaser.Scene {
   create() {
     this.createBackground();
     this.player = new Player(this).setScale(0.2);
-    this.enemies = new EnemyList(this);
+    this.enemies = new EnemyGroup(this);
+    this.addOverlap();
     //===========================
     this.createInfoForDeveloper();
   }
@@ -44,6 +45,15 @@ export default class Level1Scene extends Phaser.Scene {
     //this.add.tileSprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-plateau').setOrigin(0, 1);
     //this.add.tileSprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-ground').setOrigin(0, 1);
     //this.add.tileSprite(0, mainConst.GameScreenHeight, 'bg-lvl-1-plant').setOrigin(0, 1);
+  }
+
+  addOverlap(){
+    this.physics.add.overlap(this.player.fires, this.enemies, this.handleOverlap, undefined, this);
+  }
+
+  handleOverlap(source, target) {
+    source.setAliveStatus(false);
+    target.setAliveStatus(false);
   }
 
   createInfoForDeveloper() {
