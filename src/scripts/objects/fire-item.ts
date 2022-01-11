@@ -25,7 +25,6 @@ export class FireItem extends Phaser.Physics.Arcade.Sprite {
 
   update() {
     if (this.active && (this.x < -mainConst.GameScreenWidth || this.x > mainConst.GameScreenWidth + this.width)) {
-      console.log("deactivated fire")
       this.setAliveStatus(false);
     }
   }
@@ -44,6 +43,5 @@ export class FireItem extends Phaser.Physics.Arcade.Sprite {
     this.x = sourceObject.x + 15;
     this.y = sourceObject.y;
     this.setAliveStatus(true);
-    console.log('reset fire')
   }
 }
