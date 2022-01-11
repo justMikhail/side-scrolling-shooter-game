@@ -33,7 +33,7 @@ export class Player extends EnemyItem {
     this.scene.anims.create({
       key: 'player-fly-anims',
       frames,
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1,
     });
 

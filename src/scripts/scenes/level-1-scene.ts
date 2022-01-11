@@ -4,6 +4,7 @@ import {mainConst} from '../const/main-const';
 import {Player} from '../objects/player';
 import {EnemyGroup} from '../objects/enemy-group';
 import {Color} from '../const/color';
+import {BoomItem} from '../objects/boom-item';
 
 export default class Level1Scene extends Phaser.Scene {
   fpsText;
@@ -66,9 +67,12 @@ export default class Level1Scene extends Phaser.Scene {
   }
 
   handleOverlap(source, target) {
-    if (source !== this.player && target !== this.player) {
+    const enemy = [source, target].find((item) => item.texture.key === 'enemy');
+
+    if (enemy) {
       ++this.score;
       this.scoreText.setText(`Score ${this.score}`);
+      BoomItem.generate(this, enemy.x, enemy.y);
     }
 
     source.setAliveStatus(false);
