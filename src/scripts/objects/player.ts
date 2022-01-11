@@ -1,48 +1,51 @@
-import Phaser from 'phaser';
-import {mainConst} from '../const/main-const';
-// objects
-import {FireList} from './fire-list';
+import {mainConst} from "../const/main-const";
+import {EnemyItem} from "./enemy-item";
+import {FireList} from "./fire-list";
 
-export class Player extends Phaser.Physics.Arcade.Sprite {
-  timer;
-  fireList;
+export class Player extends EnemyItem {
+    fires;
+    timer;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
-    super(scene, x, y, texture, frame);
-    this.init();
-  }
-
-  init() {
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
-    this.body.enable = true;
-    this.fireList = new FireList(this.scene);
-
-    this.timer = this.scene.time.addEvent({
-      delay: 400,
-      loop: true,
-      callback: this.fire,
-      callbackScope: this,
-    });
-  }
-
-  fire() {
-    this.fireList.createFireItem(this);
-  }
-
-  addMovement(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
-    this.setVelocity(mainConst.player.basicSpeed);
-
-    if (cursors.left.isDown) {
-      this.setVelocityX(-mainConst.player.leftSpeed);
-    } else if (cursors.right.isDown) {
-      this.setVelocityX(mainConst.player.rightSpeed);
+    constructor(scene) {
+        super({
+            scene,
+            x: 150,
+            y: mainConst.GameScreenHeight / 2,
+            texture: 'player',
+            frame: 'fly_000',
+            velocity: 500
+        });
     }
 
-    if (cursors.up.isDown) {
-      this.setVelocityY(-mainConst.player.upSpeed);
-    } else if (cursors.down.isDown) {
-      this.setVelocityY(mainConst.player.downSpeed);
+    init(data) {
+        super.init(data);
+        this.fires = new FireList(this.scene);
+        this.timer = this.scene.time.addEvent({
+            delay: 500,
+            loop: true,
+            callback: this.fire,
+            callbackScope: this
+        });
     }
-  }
+
+    fire() {
+        this.fires.createFire(this);
+    }
+
+    // @ts-ignore
+    move(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
+        this.setVelocity(mainConst.player.basicSpeed);
+
+        if (cursors.left.isDown) {
+            this.setVelocityX(-mainConst.player.leftSpeed);
+        } else if (cursors.right.isDown) {
+            this.setVelocityX(mainConst.player.rightSpeed);
+        }
+
+        if (cursors.up.isDown) {
+            this.setVelocityY(-mainConst.player.upSpeed);
+        } else if (cursors.down.isDown) {
+            this.setVelocityY(mainConst.player.downSpeed);
+        }
+    }
 }

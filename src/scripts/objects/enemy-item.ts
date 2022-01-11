@@ -1,56 +1,33 @@
-import Phaser from 'phaser';
-import {mainConst} from '../const/main-const';
+import {mainConst} from "../const/main-const";
+import {MovableObject} from "./movable-object";
 
-export class EnemyItem extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
-    super(scene, x, y, texture, frame);
-    this.init();
-  }
+export class EnemyItem extends MovableObject {
 
-  static generateAttributes() {
-    const x = mainConst.GameScreenWidth + 250;
-    const y = Phaser.Math.Between(100, mainConst.GameScreenHeight - 100);
-    const randomId = Phaser.Math.Between(1, 4);
-
-    return {x, y, randomId};
-  }
-
-  static generate(scene) {
-    const data = EnemyItem.generateAttributes();
-
-    return new EnemyItem(scene, data.x, data.y, 'enemy', `enemy_${data.randomId}`);
-  }
-
-  init() {
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
-    this.body.enable = true;
-    this.scene.events.on('update', this.update, this);
-  }
-
-  reset() {
-    const data = EnemyItem.generateAttributes();
-
-    this.x = data.x;
-    this.y = data.y;
-    this.setFrame(`enemy_${data.randomId}`);
-
-    this.setAliveStatus(true);
-  }
-
-  update() {
-    if (this.active && this.x < -this.width) {
-      this.setAliveStatus(false);
+    static generateAttributes() {
+        const x = mainConst.GameScreenWidth + 200;
+        const y = Phaser.Math.Between(100, mainConst.GameScreenHeight - 100);
+        return {x, y, frame: `enemy_${Phaser.Math.Between(1, 4)}`};
     }
-  }
 
-  setAliveStatus(currentStatus: boolean) {
-    this.body.enable = currentStatus;
-    this.setVisible(currentStatus);
-    this.setActive(currentStatus);
-  }
+    static generate(scene) {
+        const data = EnemyItem.generateAttributes();
+        return new EnemyItem({
+            scene,
+            x: data.x,
+            y: data.y,
+            texture: 'enemy',
+            frame: data.frame,
+            velocity: -500
+        });
+    }
 
-  public addMovement() {
-    this.setVelocityX(-mainConst.enemy.basicSpeed);
-  }
+    reset() {
+        const data = EnemyItem.generateAttributes();
+        super.reset(data.x, data.y);
+        this.setFrame(data.frame);
+    }
+
+    isDead() {
+        return this.x < -this.width;
+    }
 }

@@ -1,47 +1,19 @@
-import Phaser from 'phaser';
-import {mainConst} from "../const/main-const";
+import {mainConst} from '../const/main-const';
+import {MovableObject} from './movable-object';
 
-export class FireItem extends Phaser.Physics.Arcade.Sprite {
-  constructor(data) {
-    super(data.scene, data.x, data.y, data.texture, data.frame);
-    this.init(data);
-  }
-
-  static generate(scene, sourceObject) {
+export class FireItem extends MovableObject {
+  static generate(scene, source) {
     const data = {
       scene,
-      x: sourceObject.x + 15,
-      y: sourceObject.y,
+      x: source.x + 15,
+      y: source.y,
       texture: 'fire-item',
-      velocity: mainConst.fireItem.basicSpeed,
+      velocity: 750,
     };
-    return  new FireItem(data)
+    return new FireItem(data);
   }
 
-  init(data) {
-    this.scene.add.existing(this);
-    this.scene.events.on('update', this.update, this);
-  }
-
-  update() {
-    if (this.active && (this.x < -mainConst.GameScreenWidth || this.x > mainConst.GameScreenWidth + this.width)) {
-      this.setAliveStatus(false);
-    }
-  }
-
-  setAliveStatus(currentStatus: boolean) {
-    this.body.enable = currentStatus;
-    this.setVisible(currentStatus);
-    this.setActive(currentStatus);
-  }
-
-  addMovement() {
-    this.setVelocityX(mainConst.fireItem.basicSpeed);
-  }
-
-  reset(sourceObject) {
-    this.x = sourceObject.x + 15;
-    this.y = sourceObject.y;
-    this.setAliveStatus(true);
+  isDead() {
+    return this.x < -this.width || this.x > mainConst.GameScreenWidth + this.width;
   }
 }

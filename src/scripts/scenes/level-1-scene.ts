@@ -2,7 +2,7 @@ import FpsText from '../objects/fpsText';
 import {mainConst} from '../const/main-const';
 //objects
 import {Player} from '../objects/player';
-import EnemyList from '../objects/enemy-list';
+import {EnemyList} from '../objects/enemy-list';
 
 export default class Level1Scene extends Phaser.Scene {
   fpsText;
@@ -24,7 +24,7 @@ export default class Level1Scene extends Phaser.Scene {
 
   create() {
     this.createBackground();
-    this.player = new Player(this, 150, mainConst.GameScreenHeight * 0.5, 'player', 'fly_000').setScale(0.2);
+    this.player = new Player(this).setScale(0.2);
     this.enemies = new EnemyList(this);
     //===========================
     this.createInfoForDeveloper();
@@ -33,7 +33,7 @@ export default class Level1Scene extends Phaser.Scene {
   update() {
     this.fpsText.update();
     this.bgSky.tilePositionX += 0.5;
-    this.player.addMovement(this.cursors);
+    this.player.move(this.cursors);
   }
 
   createBackground() {

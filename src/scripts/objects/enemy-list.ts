@@ -1,45 +1,47 @@
-import {EnemyItem} from './enemy-item';
-import Phaser from 'phaser';
+import {EnemyItem} from "./enemy-item";
 
-export default class EnemyList extends Phaser.Physics.Arcade.Group {
-  enemyMaxCount: number;
-  enemyCreatedCount: number;
-  timer;
+export class EnemyList extends Phaser.Physics.Arcade.Group {
+    timer;
+    countMax;
+    countCreated
 
-  constructor(scene: Phaser.Scene) {
-    // @ts-ignore
-    super(scene);
-    this.scene = scene;
-    this.enemyMaxCount = 5;
-    this.enemyCreatedCount = 0;
+    constructor(scene) {
+        // @ts-ignore
+        super();
+        this.scene = scene;
 
-    this.timer = this.scene.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: this.createEnemyListByTimer,
-      callbackScope: this,
-    });
-  }
+        this.countMax = 5;
+        this.countCreated = 0;
 
-  createEnemyListByTimer() {
-    if (this.enemyCreatedCount <= this.enemyMaxCount) {
-      this.createEnemyItem();
-    } else {
-      this.timer.remove();
-    }
-  }
-
-  createEnemyItem() {
-    let enemy = this.getFirstDead();
-
-    if (!enemy) {
-      enemy = EnemyItem.generate(this.scene);
-    } else {
-      enemy.reset();
+        this.timer = this.scene.time.addEvent({
+            delay: 1000,
+            loop: true,
+            callback: this.tick,
+            callbackScope: this
+        });
     }
 
-    this.add(enemy);
-    enemy.addMovement();
-    ++this.enemyCreatedCount;
-  }
+    tick() {
+        if (this.countCreated < this.countMax) {
+            this.createEnemy();
+        } else {
+            this.timer.remove();
+        }
+    }
+
+    createEnemy() {
+        let enemy = this.getFirstDead();
+
+        if (!enemy) {
+            console.log('create new enemy');
+            enemy  = EnemyItem.generate(this.scene);
+            this.add(enemy);
+        } else {
+            console.log('reset existing enemy');
+            enemy.reset();
+        }
+
+        enemy.move();
+        ++this.countCreated;
+    }
 }
