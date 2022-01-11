@@ -7,7 +7,7 @@
 Demo Preview. [Try it there!]()
 
 <a href="#">
-<img src="readme/screenshot.png" width="640" style='border: 0.20em solid #e1e4e8;border-radius: 15px;'/>
+<img src="readme/screenshot1.png" width="640" style='border: 0.20em solid #e1e4e8;border-radius: 15px;'/>
 </a>
 
 ## How To Use
