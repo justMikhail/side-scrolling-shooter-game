@@ -10,11 +10,13 @@ export default class StartScene extends Phaser.Scene {
     super({key: 'start-scene'});
   }
 
-  create() {
+  create(data) {
     this.createBackground();
-    this.createText();
     this.setEvents();
-    //=========
+    if (data.score !== undefined) {
+      this.createStatsBoard(data);
+    }
+    this.createText();
     this.createInfoForDeveloper();
   }
 
@@ -28,7 +30,7 @@ export default class StartScene extends Phaser.Scene {
 
   createText() {
     this.add
-      .text(mainConst.GameScreenWidth * 0.5, mainConst.GameScreenHeight * 0.5, 'Tap to start', {
+      .text(mainConst.GameScreenWidth * 0.5, mainConst.GameScreenHeight * 0.5 + 150, 'Tap to start', {
         color: Color.basicWhite,
         fontSize: '40px',
       })
@@ -39,6 +41,22 @@ export default class StartScene extends Phaser.Scene {
     this.input.on('pointerdown', () => {
       this.scene.start(GameSceneRoute.Level1);
     });
+  }
+
+  createStatsBoard(data) {
+    this.add.graphics()
+      .fillStyle(0x000000, 0.7)
+      .fillRoundedRect(mainConst.GameScreenWidth * 0.5 - 200, mainConst.GameScreenHeight * 0.5 - 200, 400, 400);
+
+    const textTitle = data.isCompleted ? 'Mission Complete' : 'Mission Failed';
+    const textScore = `Score: ${data.score}`;
+    const textStyle = {
+      fontSize: "42px",
+      fill: Color.basicWhite
+    }
+
+    this.add.text(mainConst.GameScreenWidth * 0.5, mainConst.GameScreenHeight * 0.5 - 150, textTitle, textStyle).setOrigin(0.5);
+    this.add.text(mainConst.GameScreenWidth * 0.5, mainConst.GameScreenHeight * 0.5 - 50, textScore, textStyle).setOrigin(0.5);
   }
 
   createInfoForDeveloper() {

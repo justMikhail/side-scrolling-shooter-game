@@ -1,6 +1,5 @@
 import {mainConst} from '../const/main-const';
 import {EnemyItem} from './enemy-item';
-import {FireGroup} from './fire-group';
 
 export class Player extends EnemyItem {
   fires;
@@ -26,7 +25,7 @@ export class Player extends EnemyItem {
     });
   }
 
-  // @ts-ignore
+  // @ts-ignore todo fix TS error
   addMove(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
     this.setVelocity(mainConst.player.basicSpeed);
 

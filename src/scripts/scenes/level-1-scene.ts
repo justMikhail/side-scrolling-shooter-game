@@ -3,6 +3,7 @@ import {mainConst} from '../const/main-const';
 //objects
 import {Player} from '../objects/player';
 import {EnemyGroup} from '../objects/enemy-group';
+import {Color} from '../const/color';
 
 export default class Level1Scene extends Phaser.Scene {
   fpsText;
@@ -10,6 +11,8 @@ export default class Level1Scene extends Phaser.Scene {
   enemy;
   enemyGroup;
   cursors;
+  score;
+  scoreText;
   bgSky;
 
   constructor() {
@@ -18,9 +21,8 @@ export default class Level1Scene extends Phaser.Scene {
 
   init() {
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.score = 0;
   }
-
-  preload() {}
 
   create() {
     this.createBackground();
@@ -28,8 +30,17 @@ export default class Level1Scene extends Phaser.Scene {
     this.enemyGroup = new EnemyGroup(this);
     this.addOverlap();
     this.createCompleteEvents();
+    this.createScoreBoard();
     //===========================
     this.createInfoForDeveloper();
+  }
+
+  createScoreBoard() {
+    this.scoreText = this.add.text(50, 50, 'Score: 0', {
+      fontSize: '42px',
+      // @ts-ignore
+      fill: Color.basicWhite,
+    });
   }
 
   update() {
@@ -55,18 +66,25 @@ export default class Level1Scene extends Phaser.Scene {
   }
 
   handleOverlap(source, target) {
+    if (source !== this.player && target !== this.player) {
+      ++this.score;
+      this.scoreText.setText(`Score ${this.score}`);
+    }
+
     source.setAliveStatus(false);
     target.setAliveStatus(false);
   }
 
   createCompleteEvents() {
-    this.player.once('killed', this.onComplete, this);
-
-    console.log(this.player.once);
+    this.player.once('killed', this.handleMissionComplete, this);
+    this.events.on('enemy-group-killed', this.handleMissionComplete, this);
   }
 
-  onComplete() {
-    this.scene.start('start-scene');
+  handleMissionComplete() {
+    this.scene.start('start-scene', {
+      score: this.score,
+      isCompleted: this.player.active,
+    });
   }
 
   createInfoForDeveloper() {
