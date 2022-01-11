@@ -6,10 +6,10 @@ export class FireItem extends MovableObject {
   static generate(scene, source) {
     const data = {
       scene,
-      x: source.x + 15,
+      x: source.x,
       y: source.y,
-      texture: 'fire-item',
-      velocity: 750,
+      texture: source.bullet.texture,
+      velocity: source.bullet.velocity,
     };
     return new FireItem(data);
   }

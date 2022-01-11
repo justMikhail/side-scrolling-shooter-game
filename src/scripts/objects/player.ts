@@ -14,6 +14,15 @@ export class Player extends EnemyItem {
       texture: 'player',
       frame: 'fly_000',
       velocity: 500,
+      bullet: {
+        delay: 500,
+        texture: 'fire-item',
+        velocity: 750,
+      },
+      origin: {
+        x: 1,
+        y: 0.5,
+      }
     });
   }
 
