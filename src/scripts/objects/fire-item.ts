@@ -2,6 +2,7 @@ import {mainConst} from '../const/main-const';
 import {MovableObject} from './movable-object';
 
 export class FireItem extends MovableObject {
+
   static generate(scene, source) {
     const data = {
       scene,
@@ -13,7 +14,7 @@ export class FireItem extends MovableObject {
     return new FireItem(data);
   }
 
-  isDead() {
+  isBeyondViewport() {
     return this.x < -this.width || this.x > mainConst.GameScreenWidth + this.width;
   }
 }

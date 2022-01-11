@@ -41,7 +41,7 @@ export class EnemyList extends Phaser.Physics.Arcade.Group {
             enemy.reset();
         }
 
-        enemy.move();
+        enemy.addMove();
         ++this.countCreated;
     }
 }
